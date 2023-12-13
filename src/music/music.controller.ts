@@ -1,72 +1,36 @@
-// music.controller.ts
-import {
-  Controller,
-  Get,
-  // Post,
-  // Put,
-  // Delete,
-  // Body,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { MusicService } from './music.service';
-// import { MusicDto } from './dto/music.dto';
+import { MusicEntity } from 'src/entites/music.entity';
 
-@Controller('music')
+@Controller('/music')
 export class MusicController {
   constructor(private readonly musicService: MusicService) {}
 
   @Get()
-  getAllMusic() {
-    return this.musicService.getAllMusic();
+  getMusicList(): Promise<MusicEntity[]> {
+    return this.musicService.findAll();
   }
-
-  @Get('search/title/:title')
-  searchByTitle(@Param('title') title: string) {
-    return this.musicService.searchByTitle(title);
-  }
-
-  @Get('search/artist/:artist')
-  searchByArtist(@Param('artist') artist: string) {
-    return this.musicService.searchByArtist(artist);
-  }
-
-  @Get('sort/title')
-  sortByTitleAsc() {
-    return this.musicService.sortByTitleAsc();
-  }
-
-  @Get('category/:categoryId')
-  getByCategory(@Param('categoryId') categoryId: number) {
-    return this.musicService.getByCategory(categoryId);
-  }
-
-  @Get('sort/artist')
-  sortByArtistAsc() {
-    return this.musicService.sortByArtistAsc();
-  }
-
-  @Get('sort/date')
-  sortByDateAsc() {
-    return this.musicService.sortByDateAsc();
-  }
-
-  // @Get(':id')
-  // getMusicById(@Param('id') id: number) {
-  //   return this.musicService.getMusicById(id);
-  // }
-
-  // @Post()
-  // createMusic(@Body() musicDto: MusicDto) {
-  //   return this.musicService.createMusic(musicDto);
-  // }
-
-  // @Put(':id')
-  // updateMusic(@Param('id') id: number, @Body() musicDto: MusicDto) {
-  //   return this.musicService.updateMusic(id, musicDto);
-  // }
-
-  // @Delete(':id')
-  // deleteMusic(@Param('id') id: number) {
-  //   return this.musicService.deleteMusic(id);
-  // }
 }
+// GET
+// /music
+// 노래 리스트 (표준)
+
+// POST
+// /music
+// 노래 추가
+
+// GET
+// /music/{music_idx}
+// 노래 상세정보 조회
+
+// PUT
+// /music/{music_idx}
+// 노래 수정
+
+// DELETE
+// /music/{music_idx}
+// 노래 삭제
+
+// GET
+// /music/search/album_cover/{keyword}
+// 앨범아트 검색
