@@ -51,6 +51,6 @@ export class MusicEntity {
   @Column({ length: 255, nullable: false, comment: '앨범아트' })
   album_art: string;
 
-  @Column({ length: 255, nullable: false, comment: '음악 유튜브 링크' })
-  youtube_link: string;
+  @Column({ length: 255, nullable: true, comment: '노래방 유튜브 링크' })
+  karaoke_youtube_link: string;
 }

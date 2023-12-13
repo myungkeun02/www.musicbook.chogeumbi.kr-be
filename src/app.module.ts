@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MusicEntity } from './entites/music.entity';
+import { UserEntity } from './entites/user.entity';
+import { MusicModule } from './music/music.module';
 
 @Module({
   imports: [
@@ -17,7 +20,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       synchronize: true,
+      entities: [MusicEntity, UserEntity],
     }),
+    MusicModule,
   ],
   controllers: [AppController],
   providers: [AppService],
