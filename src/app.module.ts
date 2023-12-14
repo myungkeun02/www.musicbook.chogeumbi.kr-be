@@ -6,6 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MusicEntity } from './entites/music.entity';
 import { UserEntity } from './entites/user.entity';
 import { MusicModule } from './music/music.module';
+import { UserController } from './user/user.controller';
+import { UserModule } from './user/user.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { JwtAccessStrategy } from './commons/auth/jwt-access.strategy';
+import { JwtRefreshStrategy } from './commons/auth/jwt-refresh.strategy';
 
 @Module({
   imports: [
@@ -23,8 +30,10 @@ import { MusicModule } from './music/music.module';
       entities: [MusicEntity, UserEntity],
     }),
     MusicModule,
+    UserModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UserController, AuthController],
+  providers: [AppService, AuthService, JwtAccessStrategy, JwtRefreshStrategy],
 })
 export class AppModule {}

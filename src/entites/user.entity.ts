@@ -9,10 +9,16 @@ import {
 
 @Entity('user')
 export class UserEntity {
-  @PrimaryGeneratedColumn({ comment: '유저 고유 식별자' })
+  @PrimaryGeneratedColumn({
+    comment: '유저 고유 식별자',
+  })
   id: number;
 
-  @Column({ length: 255, nullable: false, comment: '유저 이름' })
+  @Column({
+    length: 255, //
+    nullable: false,
+    comment: '유저 이름',
+  })
   name: string;
 
   @Column({
@@ -23,10 +29,18 @@ export class UserEntity {
   })
   email: string;
 
-  @Column({ length: 255, nullable: false, comment: '유저 비밀번호 (암호화)' })
+  @Column({
+    length: 255, //
+    nullable: false,
+    comment: '유저 비밀번호 (암호화)',
+  })
   password: string;
 
-  @Column({ length: 255, nullable: true, comment: 'jwt 리프레시 토큰' })
+  @Column({
+    length: 255, //
+    nullable: true,
+    comment: 'jwt 리프레시 토큰',
+  })
   refresh_token: string;
 
   @CreateDateColumn({
@@ -48,7 +62,11 @@ export class UserEntity {
   })
   updated_at: Date;
 
-  @Column({ default: 0, nullable: false, comment: '유저 삭제여부' })
+  @Column({
+    default: 0, //
+    nullable: false,
+    comment: '유저 삭제여부',
+  })
   is_deleted: boolean;
 
   @DeleteDateColumn({
