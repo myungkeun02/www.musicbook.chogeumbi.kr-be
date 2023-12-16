@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { UserEntity } from 'src/entites/user.entity';
+import { UserEntity } from 'src/commons/entites/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { CreateUserInputDTO } from './DTO/create-user-input.dto';
@@ -15,11 +15,11 @@ export class UserController {
       input.password,
       this.PASSWORD_SALT,
     );
-    const user = {
+    const hashUser = {
       ...input,
       password: hashedPassowrd,
     };
-
-    return this.userService.create(user);
+    console.log(hashUser);
+    return this.userService.create(hashUser);
   }
 }

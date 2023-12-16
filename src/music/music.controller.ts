@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { MusicService } from './music.service';
-import { MusicEntity } from 'src/entites/music.entity';
+import { MusicEntity } from 'src/commons/entites/music.entity';
 import { CreateMusicDto } from './DTO/create-music.dto';
 import { UpdateMusicDto } from './DTO/update-music.dto';
 import { AuthGuard } from '@nestjs/passport';

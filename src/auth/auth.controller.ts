@@ -24,14 +24,13 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() input: LoginInputDTO, @Res() res: Response) {
-    const user = await this.userService.findOne(input.eamil);
-
+    const user = await this.userService.findOne(input.email);
+    console.log(user);
     if (!user) {
       throw new UnprocessableEntityException('이메일을 확인해주세요');
     }
 
     const isAuth = await bcrypt.compare(input.password, user.password);
-
     if (!isAuth) {
       throw new UnprocessableEntityException('비밀번호를 확인해주세요');
     }
