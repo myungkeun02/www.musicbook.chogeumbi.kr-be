@@ -4,6 +4,16 @@ import { MusicEntity } from 'src/commons/entites/music.entity';
 import { Repository } from 'typeorm';
 import { CreateMusicDto } from './DTO/create-music.dto';
 import { UpdateMusicDto } from './DTO/update-music.dto';
+import { PaginationOptionsDto } from './DTO/pagination-options.dto';
+
+enum SortOptions {
+  TITLE_ASC = 'title:asc',
+  TITLE_DESC = 'title:desc',
+  ARTIST_ASC = 'artist:asc',
+  ARTIST_DESC = 'artist:desc',
+  CREATED_AT_ASC = 'created_at:asc',
+  CREATED_AT_DESC = 'created_at:desc',
+}
 
 @Injectable()
 export class MusicService {
@@ -12,8 +22,32 @@ export class MusicService {
     private readonly musicRepo: Repository<MusicEntity>,
   ) {}
 
-  async findAll(): Promise<MusicEntity[]> {
-    const musicList = await this.musicRepo.find();
+  async findAll(options: PaginationOptionsDto): Promise<MusicEntity[]> {
+    const { page, limit, sort } = options;
+
+    const queryBuilder = this.musicRepo.createQueryBuilder('music');
+
+    if (sort) {
+      const [column, order] = sort.split(':');
+      const isValidSortOption = Object.values(SortOptions).includes(
+        sort as SortOptions,
+      );
+
+      if (isValidSortOption) {
+        queryBuilder.orderBy(
+          `music.${column}`,
+          order.toUpperCase() as 'ASC' | 'DESC',
+        );
+      } else {
+        queryBuilder.orderBy('music.created_at', 'DESC');
+      }
+    }
+
+    const musicList = await queryBuilder
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getMany();
+
     return musicList;
   }
 

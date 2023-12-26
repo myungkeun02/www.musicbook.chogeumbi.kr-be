@@ -53,4 +53,8 @@ export class MusicEntity {
 
   @Column({ length: 255, nullable: true, comment: '노래방 유튜브 링크' })
   karaoke_youtube_link: string;
+
+  // 현재 페이지
+  // 총 페이지
+  
 }

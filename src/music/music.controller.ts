@@ -8,24 +8,27 @@ import {
   Put,
   Delete,
   UseGuards,
+  Query,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { MusicService } from './music.service';
 import { MusicEntity } from 'src/commons/entites/music.entity';
 import { CreateMusicDto } from './DTO/create-music.dto';
 import { UpdateMusicDto } from './DTO/update-music.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { PaginationOptionsDto } from './DTO/pagination-options.dto';
 
 @Controller('music')
 export class MusicController {
   constructor(private readonly musicService: MusicService) {}
 
   @Get()
-  async getMusicList(): Promise<MusicEntity[]> {
-    return await this.musicService.findAll();
+  async getMusicList(
+    @Query(new DefaultValuePipe(new PaginationOptionsDto()))
+    options: PaginationOptionsDto,
+  ): Promise<MusicEntity[]> {
+    return await this.musicService.findAll(options);
   }
-  // GET
-  // /music
-  // 노래 리스트
 
   @Get(':music_idx')
   async getMusicDetail(
@@ -33,9 +36,6 @@ export class MusicController {
   ): Promise<MusicEntity> {
     return await this.musicService.findOne(musicId);
   }
-  // GET
-  // /music/{music_idx}
-  // 노래 상세정보 조회
 
   @UseGuards(AuthGuard('access'))
   @Post()
@@ -44,9 +44,6 @@ export class MusicController {
   ): Promise<MusicEntity> {
     return await this.musicService.createMusic(createMusicDto);
   }
-  // POST
-  // /music
-  // 노래 추가
 
   @UseGuards(AuthGuard('access'))
   @Put(':music_idx')
@@ -56,9 +53,6 @@ export class MusicController {
   ): Promise<MusicEntity> {
     return this.musicService.updateMusic(musicId, updateMusicDto);
   }
-  // PUT
-  // /music/{music_idx}
-  // 노래 수정
 
   @UseGuards(AuthGuard('access'))
   @Delete(':music_idx')
@@ -67,11 +61,4 @@ export class MusicController {
   ): Promise<void> {
     return this.musicService.deleteMusic(musicId);
   }
-  // DELETE
-  // /music/{music_idx}
-  // 노래 삭제
 }
-
-// GET
-// /music/search/album_cover/{keyword}
-// 앨범아트 검색
