@@ -1,8 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { UserEntity } from 'src/commons/entites/user.entity';
+import { UserEntity } from 'src/commons/entity/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
-import { CreateUserInputDTO } from './DTO/create-user-input.dto';
+import { CreateUserInputDTO } from './dto/create-user-input.dto';
 
 @Controller('user')
 export class UserController {

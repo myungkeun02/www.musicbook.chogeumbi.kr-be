@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MusicEntity } from 'src/commons/entites/music.entity';
+import { MusicEntity } from 'src/commons/entity/music.entity';
 import { Repository } from 'typeorm';
-import { CreateMusicDto } from './DTO/create-music.dto';
-import { UpdateMusicDto } from './DTO/update-music.dto';
-import { PaginationOptionsDto } from './DTO/pagination-options.dto';
+import { CreateMusicDto } from './dto/create-music.dto';
+import { UpdateMusicDto } from './dto/update-music.dto';
+import { PaginationOptionsDto } from './dto/pagination-options.dto';
 
 enum SortOptions {
   TITLE_ASC = 'title:asc',

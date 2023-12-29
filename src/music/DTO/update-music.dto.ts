@@ -15,7 +15,7 @@ export class UpdateMusicDto {
 
   @IsUrl({}, { message: '유효한 URL이어야 합니다.' })
   @IsOptional()
-  musci_youtube_link?: string;
+  music_youtube_link?: string;
 
   @IsUrl({}, { message: '유효한 URL이어야 합니다.' })
   @IsOptional()

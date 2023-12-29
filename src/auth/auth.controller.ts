@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
-import { LoginInputDTO } from './DTO/login-input.dto';
+import { LoginInputDTO } from './dto/login-input.dto';
 import { Request, Response } from 'express';
 import * as bcrypt from 'bcrypt';
-import { IOAuthUser } from './inferfaces/auth.userInterface';
+import { IOAuthUser } from './inferface/auth.userInterface';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')

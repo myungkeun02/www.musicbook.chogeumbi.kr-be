@@ -12,11 +12,11 @@ import {
   DefaultValuePipe,
 } from '@nestjs/common';
 import { MusicService } from './music.service';
-import { MusicEntity } from 'src/commons/entites/music.entity';
-import { CreateMusicDto } from './DTO/create-music.dto';
-import { UpdateMusicDto } from './DTO/update-music.dto';
+import { MusicEntity } from 'src/commons/entity/music.entity';
+import { CreateMusicDto } from './dto/create-music.dto';
+import { UpdateMusicDto } from './dto/update-music.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { PaginationOptionsDto } from './DTO/pagination-options.dto';
+import { PaginationOptionsDto } from './dto/pagination-options.dto';
 
 @Controller('music')
 export class MusicController {
