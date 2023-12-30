@@ -22,10 +22,25 @@ export class MusicService {
     private readonly musicRepo: Repository<MusicEntity>,
   ) {}
 
-  async findAll(options: PaginationOptionsDto): Promise<MusicEntity[]> {
+  async findAll(
+    options: PaginationOptionsDto,
+    search?: string,
+    category?: string,
+  ): Promise<MusicEntity[]> {
     const { page, limit, sort } = options;
 
     const queryBuilder = this.musicRepo.createQueryBuilder('music');
+
+    if (search) {
+      queryBuilder.andWhere(
+        '(music.title LIKE :search OR music.artist LIKE :search)',
+        { search: `%${search}%` },
+      );
+    }
+
+    if (category) {
+      queryBuilder.andWhere('music.category = :category', { category });
+    }
 
     if (sort) {
       const [column, order] = sort.split(':');

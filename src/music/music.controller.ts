@@ -26,8 +26,10 @@ export class MusicController {
   async getMusicList(
     @Query(new DefaultValuePipe(new PaginationOptionsDto()))
     options: PaginationOptionsDto,
+    @Query('search') search: string,
+    @Query('category') category: string,
   ): Promise<MusicEntity[]> {
-    return await this.musicService.findAll(options);
+    return await this.musicService.findAll(options, search, category);
   }
 
   @Get(':music_idx')
