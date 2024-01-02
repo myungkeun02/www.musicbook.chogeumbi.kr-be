@@ -1,5 +1,6 @@
 import { IsEnum, IsOptional, IsPositive } from 'class-validator';
 
+// 정렬 옵션을 나타내는 enum
 enum SortOptions {
   TITLE_ASC = 'title:asc',
   TITLE_DESC = 'title:desc',
@@ -10,14 +11,17 @@ enum SortOptions {
 }
 
 export class PaginationOptionsDto {
+  // 페이지 번호, 양수이어야 함 (옵션)
   @IsOptional()
   @IsPositive()
   page?: number;
 
+  // 페이지당 항목 수, 양수이어야 함 (옵션)
   @IsOptional()
   @IsPositive()
   limit?: number;
 
+  // 정렬 옵션, SortOptions enum에 속해야 함 (옵션)
   @IsOptional()
   @IsEnum(SortOptions)
   sort?: SortOptions;
